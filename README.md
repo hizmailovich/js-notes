@@ -211,9 +211,30 @@ add();
 Topic: **Pure Functions and Immutability**
 
 25. What is a pure function in JavaScript, and what characteristics define a function as "pure"? How do pure functions relate to immutability in JavaScript?
-26. Describe the concept of named immutable methods in JavaScript and provide examples of such methods.
+
+    **Answer:** is a function that always returns the same result if the same arguments are passed. It does not depend on any state or data change during a program’s execution. Rather, it only depends on its input arguments. Also, a pure function does not produce any observable side effects such as network requests or data mutation, etc. Pure functions don't modify their input. They treat the input values as immutable.
+26. Describe the concept of named immutable methods in JavaScript and provide examples of such methods. 
+
+    **Answer:** 
 27. Provide an example of a Higher-Order Function in JavaScript and explain how it can accept another function as an argument.
+
+    **Answer:** higher order function is a function that takes one or more functions as arguments, or returns a function as its result.
+```javascript
+function callbackFunction(){
+    console.log('I am  a callback function');
+}
+
+// higher order function
+function higherOrderFunction(func){
+    console.log('I am higher order function')
+    func()
+}
+
+higherOrderFunction(callbackFunction);
+```
 28. How do you pass arguments to a function in JavaScript, and how can a function return a value?
+
+    **Answer:** rest parameters parameters, default parameters values, rest parameters `...args`, `arguments` object.
 
 Topic: **Function Composition and Array Methods**
 
