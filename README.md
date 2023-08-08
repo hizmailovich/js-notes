@@ -239,9 +239,77 @@ higherOrderFunction(callbackFunction);
 Topic: **Function Composition and Array Methods**
 
 29. What is currying in JavaScript, and how does it help with function composition? Provide an example of currying.
+
+    **Answer:** currying is a transformation of functions that translates a function from callable as `f(a, b, c)` into callable as `f(a)(b)(c)`. Currying in JavaScript transforms a function with multiple arguments into a nested series of functions, each taking a single argument. Currying helps you avoid passing the same variable multiple times, and it helps you create a higher order function.
+```javascript
+function curry(f) { // curry(f) does the currying transform
+  return function(a) {
+    return function(b) {
+      return f(a, b);
+    };
+  };
+}
+
+// usage
+function sum(a, b) {
+  return a + b;
+}
+
+let curriedSum = curry(sum);
+
+alert( curriedSum(1)(2) ); // 3
+```
 30. Provide an example of function composition and describe its advantages over nested function calls.
+
+    **Answer:** function composition is a powerful technique used in programming to combine multiple functions into a single, more complex function. It allows developers to create more efficient and reusable code by breaking down complex operations into smaller, more manageable pieces.
+```javascript
+let hello = (x) => `Hello, ${x}`;
+let toUpperCase = x => x.toUpperCase();
+let greeting = x => hello(toUpperCase(x));
+```
 31. Describe various array methods such as map, filter, reduce, and forEach, and provide examples of their usage.
+
+    **Answer:**
+```javascript
+a.every(x => x%2 === 0) // true, when all elements folow this rule
+a.some(x => x%2 === 0) // [2,4] -> true, [2,3] -> true, [1,3] -> false
+a.map(x => x*x)
+a.filter(x => x%2 === 0)
+a.reduce((acc, item) => item * acc, 1)
+a.forEach(x => console.log(x))
+```
 32. How do you create and initialize objects using object literals and the "new" keyword in JavaScript? How can you access, modify, and delete object properties?
+
+    **Answer:**
+```javascript
+// 1 way: obj -> Object.prototype -> null
+let obj = {a: 1};
+
+// 2 way: newObj -> obj -> Object.prototype -> null
+const newObj = Object.create(obj)
+
+// 3 way: ES6 classes
+class Rectangle {
+	constructor(height, width){
+		this.height = height;
+		this.width = width;
+	}
+	getArea = () => this.width * this.height;
+}
+// Properties
+// 1 way
+Object.keys();
+Object.entires();
+Object.values();
+
+// 2 way
+// loop - for in
+
+// 3 way
+    Object.getOwnPropertyNames();
+    Object.defineProperty();
+    Object.defineProperties();
+```
 
 Topic: **Prototypes and Object-Oriented Programming**
 
