@@ -51,8 +51,7 @@ Topic: **JavaScript Basics**
    **Answer:** hoisting is a concept where a variable or function is lifted to the top of its global or local scope before the whole code is executed. This makes it possible for such a variable/function to be accessed before initialization. All functions and variables in JavaScript are hoisted, but only declared functions can be accessed before initialization. Variables declared with `let` and `const` are hoisted, but they cannot be accessed before the line they are initialized.
 10. Describe how logical operations work in JavaScript, and name all the object methods available for Boolean objects.
 
-   **Answer:** there are four logical operators in JavaScript: || (OR), && (AND), ! (NOT), ?? (Nullish Coalescing). ?? returns the first argument if it’s not null/undefined. Otherwise, the second one.
-   Boolean.prototype.toString(), Boolean.prototype.valueOf().
+    **Answer:** there are four logical operators in JavaScript: || (OR), && (AND), ! (NOT), ?? (Nullish Coalescing). ?? returns the first argument if it’s not null/undefined. Otherwise, the second one. Boolean.prototype.toString(), Boolean.prototype.valueOf().
 
 Topic: **Objects and Functions**
 
