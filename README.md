@@ -23,10 +23,35 @@ Install a module locally if you're going to require() it. Install a module globa
 Topic: **JavaScript Basics**
 
 6. What is the difference between regular functions and arrow functions in JavaScript? How are they used, and when should you prefer one over the other?
+
+   **Answer:** 
+   - `this` value: `this` value inside a regular function is dynamic and depends on the invocation. But `this` inside the arrow function is bound lexically and equals to `this` of the outer function.
+   - constructors: an arrow function cannot be used as a constructor.
+   - `arguments` object: arguments object inside the regular functions contains the arguments in an array-like object. The arrow function, on the opposite, doesn't define arguments (but you can easily access the arrow function arguments using a rest parameter `...args`).
+   - implicit return: if the arrow function has one expression, then the expression is returned implicitly, even without using the `return` keyword.
+   - methods: you can define methods using the arrow function syntax inside classes. Arrow methods bind `this` value to the class instance. Anyhow the arrow method is invoked, `this` always equals the class instance, which is useful when the methods are used as callbacks.
+   - hoisting: arrow functions cannot be accessed before initialization.
+   - duplicate named parameters: arrow functions can never have duplicate named parameters, whether in strict or non-strict mode.
 7. Explain the difference between `let` and `const` in JavaScript, including their scoping rules and immutability features.
+
+   **Answer:** `const` is a signal that the identifier won’t be reassigned. `let` is a signal that the variable may be reassigned. It also signals that the variable will be used only in the block it’s defined in, which is not always the entire containing function.
 8. What are the different data types in JavaScript? Provide examples of each data type.
+
+   **Answer:**
+   - String
+   - Number
+   - Bigint
+   - Boolean
+   - Undefined
+   - Null
+   - Symbol
+   - Object (object, array, date)
 9. How does hoisting work in JavaScript, and how can it affect variable declarations and function definitions?
+  
+   **Answer:** hoisting is a concept where a variable or function is lifted to the top of its global or local scope before the whole code is executed. This makes it possible for such a variable/function to be accessed before initialization. All functions and variables in JavaScript are hoisted, but only declared functions can be accessed before initialization. Variables declared with `let` and `const` are hoisted, but they cannot be accessed before the line they are initialized.
 10. Describe how logical operations work in JavaScript, and name all the object methods available for Boolean objects.
+
+    **Answer:** there are four logical operators in JavaScript: || (OR), && (AND), ! (NOT), ?? (Nullish Coalescing). ?? returns the first argument if it’s not null/undefined. Otherwise, the second one. Boolean.prototype.toString(), Boolean.prototype.valueOf().
 
 Topic: **Objects and Functions**
 
