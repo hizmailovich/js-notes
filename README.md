@@ -137,9 +137,76 @@ const c = +str;
 Topic: **Function Concepts**
 
 21. What is an IIFE (Immediately Invoked Function Expression) in JavaScript, and what problem does it solve? Provide an example of its usage.
+
+    **Answer:** an IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined. The plan is that once we’ve created an IIFE, we have no intention of calling the function again. Use cases:
+    - avoid polluting the global namespace
+    - execute an async function
+    - the module pattern
+```javascript
+(function () {
+    // …
+})();
+
+(() => {
+    // …
+})();
+
+(function() {
+ var x = 20;
+ var y = 20;
+ var answer = x + y;
+ console.log(answer);
+ })();
+```
+
 22. How do you define a function in JavaScript? Provide examples of both function declarations and function expressions.
+
+    **Answer:** 
+```javascript
+function square(number) {
+  return number * number;
+}
+
+const square = function (number) {
+    return number * number;
+};
+```
 23. Can a function in JavaScript accept multiple arguments? If yes, how do you pass and handle them within the function?
+
+    **Answer:**  we can handle it in two ways:
+    - `arguments` object (ES5) - is a local JavaScript object variable that is available in all non-arrow functions. arguments is an Array-like object accessible inside functions that contain the values of the arguments passed to that function.
+    - rest parameters `...args` (ES6) - provides an easier and cleaner way of working with an indefinite number of arguments.
+    
+    The main difference between rest parameters and the arguments object is:
+    - all the array methods like map, sort, and filter can be applied directly on the rest parameters array but not on the `arguments` object. To use Array methods on the `arguments` object, it must be converted to a real array first.
+    - the `arguments` object is not available in arrow functions.
+```javascript
+function foo() {
+  for (var i = 0; i < arguments.length; i++) {
+    console.log(arguments[i]);
+  }
+}
+function my_log(...args) {
+    // args is an Array
+    console.log(args);
+    // You can pass this array as parameters to another function
+    console.log(...args);
+}
+```
 24. Provide an example of a closure in JavaScript and explain how it works.
+
+    **Answer:** closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment). In other words, a closure gives you access to an outer function's scope from an inner function. In JavaScript, closures are created every time a function is created, at function creation time.
+
+```javascript
+const add = (function () {
+  let counter = 0;
+  return function () {counter += 1; return counter}
+})();
+
+add();
+add();
+add();
+```
 
 Topic: **Pure Functions and Immutability**
 
