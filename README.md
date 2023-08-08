@@ -3,10 +3,22 @@
 Topic: **Node.js, V8 engine, NPM, Version system, and Module system**
 
 1. What is Node.js? What is the V8 engine? How does Node.js use the V8 engine to execute JavaScript code, and how does it contribute to its performance?
+
+    **Answer:** V8 is Google’s open source high-performance JavaScript and WebAssembly engine, written in C++. Node.js is a JavaScript runtime built on top of the V8 JavaScript engine. It allows developers to run JavaScript on the server to build network applications, using JavaScript as the programming language on both the front-end and back-end. Node.js uses V8 to execute JavaScript code on the server side. When a developer writes JavaScript code for a Node.js application, the code is passed to V8 for execution.
+
 2. Explain the significance of NPM in the Node.js ecosystem and why it is considered a crucial tool.
+    
+    **Answer:** The package manager in the Node.js ecosystem is NPM (Node Package Manager). It is a command-line tool and a vast repository of reusable code modules and libraries. NPM allows developers to easily manage dependencies and integrate third-party functionality into their Node.js applications.
 3. What is versioning in software development? Describe the MAJOR, MINOR, and PATCH versioning system commonly used in package management.
+    
+    **Answer:** The Node Package Manager (npm) ecosystem uses Semantic Versioning as the standard for version numbers. The NPM ecosystem uses Semantic Versioning (SemVer) which follows the convention of MAJOR.MINOR.PATCH. This is to differentiate between versions that introduce major breaking changes, minor backwards-compatible changes, and patch changes for small fixes.
 4. How do you use modules in JavaScript? How can you write your own module? Provide an overview of the module system in Node.js.
+    
+    **Answer:** Module in Node.js is a simple or complex functionality organized in single or multiple JavaScript files which can be reused throughout the Node.js application. Built-in Modules, Local modules, Third-party modules. Node.js has two module systems: CommonJS (`require()`, and variables and functions export from a CommonJS module with `module.exports`) modules and ECMAScript (`import` and `export` statements) modules. Authors can tell Node.js to use the ECMAScript modules loader via the .mjs file extension, the package.json "type" field. ES modules are the standard for JavaScript, while CommonJS is the default in Node.js
 5. What are global modules in Node.js, and how do they differ from local modules? How do you interpret version specifications like "1.2.3", "~3.2.0", or "^2.1.0"?
+   
+    **Answer:** Generally, modules are scoped inside the project directory only, it means you can’t use them outside the project. But as global modules are installed on the computer (mostly root location), they can easily be used anywhere in our system. 
+Install a module locally if you're going to require() it. Install a module globally if you're going to run it on the command line. ~1.2.3 is equivalent to >=1.2.3 <1.3.0; ^1.2.3 is equivalent to >=1.2.3 <2.0.0
 
 Topic: **JavaScript Basics**
 
