@@ -56,12 +56,47 @@ Topic: **JavaScript Basics**
 Topic: **Objects and Functions**
 
 11. How do objects look like in JavaScript, and what are property descriptors associated with object properties?
+
+    **Answer:** a property descriptor of an object consists of some of the following attributes to define each property:
+    - value: the value associated with the property that is called.
+    - writable: indicates if the property can be changed or not. It only returns true if the property can be manipulated.
+    - enumerable: if the property is visible during enumeration of the properties of the corresponding object, then it returns true. 
+    - configurable: indicates if the property descriptor can be changed or removed from the corresponding object.
+```javascript
+const obj = {
+    property1: 2
+};
+const descriptor1 = Object.getOwnPropertyDescriptor(obj, 'property1');
+```
 12. What is a deep clone of an object, and how can you proceed to create one in JavaScript?
+
+    **Answer:** a deep copy is a copy of all elements of the original object. Changes made to the original object will not be reflected in the copy. BFS and DFS.
 13. Explain the CommonJS module system and how it is utilized in Node.js to organize and share code between different files.
+
+    **Answer:** the CommonJS module format specifies a way to define a module using a `require()` function to load modules and `module.exports` or `exports` object to expose functionality. Files with a .js extension when the nearest parent package.json file contains a top-level field `type` with a value of `commonjs`.
 14. How do you create and export a module in Node.js, and how do you import it into another file using `require`?
+
+    **Answer:** 
+```javascript
+const circle = require('./circle.js');
+exports.area = (r) => PI * r ** 2;
+module.exports = add
+```
 15. Describe the roles of the "require" function in Node.js when dealing with modules, and how does it help manage dependencies?
+
+    **Answer:**  the `require()` function will return an object, function, property or any other JavaScript type, depending on what the specified module returns.
 16. What is the difference between "exports" and "module.exports" in a Node.js module? How can you use them to expose functionalities?
+
+    **Answer:** in Node.js, `module` is a plain JavaScript object with an `exports` property. `exports` is a plain JavaScript variable that happens to be set to `module.exports`. When you require a module in another file, the code within that module is executed, and only `module.exports` is returned. When should you choose `exports` over `module.exports`? The short answer is that you probably shouldn't. While `exports` may be shorter and seem more convenient, the confusion it can cause is not worth it. Remember that `exports` is just a reference to `module.exports`, and assigning a new object to `exports` breaks that reference.
+![img.png](file%2Fimg.png)
 17. What is the difference between "exports" and "require" in a Node.js module? How are they related to each other in the module system?
+
+    **Answer:** 
+```javascript
+const circle = require('./circle.js');
+exports.area = (r) => PI * r ** 2;
+module.exports = add
+```
 
 Topic: **Type Conversion**
 
