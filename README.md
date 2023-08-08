@@ -101,8 +101,38 @@ module.exports = add
 Topic: **Type Conversion**
 
 18. What is type conversion in JavaScript, and why is it necessary? Provide examples of implicit and explicit type conversions.
+
+    **Answer:** There are two types of type conversion in JavaScript:
+    - implicit Conversion - automatic type conversion.
+    - explicit Conversion - manual type conversion (done using built-in methods).
+```javascript
+let result = '3' + 2; 
+console.log(result) // "32"
+//and
+result = Number('324'); //String(), Boolean()...
+console.log(result); // 324
+```
+
 19. Explain the concept of truthy and falsy values in JavaScript and how they relate to boolean conversions.
+
+    **Answer:** when non-boolean values are used in a boolean context, such as the condition of an if statement, they will be coerced into either true or false. Values that are coerced into true are called truthy and values that are coerced into false are called falsy.
+    JavaScript contains the following falsy values:
+    - false
+    - 0, -0 and 0n
+    - "", '' (empty strings)
+    - null, undefined and NaN 
+    - document.all
+
+    All other values are truthy.
 20. How can you convert a variable of type string to a number in JavaScript using built-in functions like `Number()`, `parseInt()`, and `+` (unary plus)?
+
+    **Answer:**
+```javascript
+const str = "25";
+const a = Number(str);
+const b = parseInt(str);
+const c = +str;
+```
 
 Topic: **Function Concepts**
 
