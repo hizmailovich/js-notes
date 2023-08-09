@@ -525,7 +525,91 @@ arr.forEach()//has the property of accessing both the index and value of each el
 Topic: **Strings and Template Strings**
 
 41. What are strings in JavaScript, and how do you create a string variable? Describe the difference between single quotes (''), double quotes ("") and backticks (``) when defining strings.
+
+    **Answer:**
+```javascript
+const literal = `literal ${value}`
+const single = 'single'
+const double = "double"
+const str = 'This is the first line \nThis is the second'
+const s = 'You can\'f' // escaping
+const str = "You can't" // don't need to escape single quote
+const str2 = 'This is a quote:"..."' // don't need to escape double quote
+```
 42. What are template strings (or template literals) in JavaScript, and how are they different from regular strings? How do you create a template string, and what benefits do they offer over traditional strings?
+
+    **Answer:** template literals are literals delimited with backtick (`) characters, allowing for multi-line strings, string interpolation with embedded expressions, and special constructs called tagged templates. Template literals are sometimes informally called template strings, because they are used most commonly for string interpolation.
+```javascript
+`string text`
+    `string text line 1
+     string text line 2`
+    `string text ${expression} string text`
+tagFunction`string text ${expression} string text`
+
+const classes = `header ${
+    isLargeScreen() ? "" : item.isCollapsed ? "icon-expander" : "icon-collapser"
+}`;
+const person = "Mike";
+const age = 28;
+
+function myTag(strings, personExp, ageExp) {
+    const str0 = strings[0]; // "That "
+    const str1 = strings[1]; // " is a "
+    const str2 = strings[2]; // "."
+
+    const ageStr = ageExp > 99 ? "centenarian" : "youngster";
+
+    // We can even return a string built using a template literal
+    return `${str0}${personExp}${str1}${ageStr}${str2}`;
+}
+
+const output = myTag`That ${person} is a ${age}.`;
+
+console.log(output);
+// That Mike is a youngster.
+```
 43. Describe how you can use String methods like toUpperCase, toLowerCase, trim, split, indexOf, substring, etc., to manipulate and extract information from strings.
+
+    **Answer:**
+```javascript
+let re = /[A-Z]/;
+let str = 'hi There! How are you?';
+let index = str.search(re); // 3
+
+let str = 'finding substring in string';
+let index = str.indexOf('str'); //11
+
+const str = 'Hello';
+const substr = str.slice(3); // 'lo'
+```
 44. How can you concatenate strings in JavaScript using traditional methods, and how does it compare to concatenation with template strings? Provide examples of both approaches.
+
+    **Answer:** there are four methods or ways by which we can concatenate strings in JavaScript:
+    - using the `concat()` method - `String.concat()` method accepts a list of strings as parameters and returns a new string after concatenation i.e. combination of all the strings. If the parameters are not strings, the `concat()` method firstly converts them into strings and then concatenation occurs. As we know that strings in JavaScript are immutable, so the `concat()` method doesn't modify the input strings but returns a new string that has all the input strings concatenated.
+    - using the '+' operator 
+    - using the array `join()` method - the separator can be user-customized and by default, if not specified, it uses the (,) comma as a separator.
+    - using template literals
+    
 45. What is the difference between a tagged template literal and a regular template literal? How can you use tagged template literals to customize string interpolation behavior?
+
+    **Answer:** tags allow you to parse template literals with a function. The first argument of a tag function contains an array of string values. The remaining arguments are related to the expressions. The tag function can then perform whatever operations on these arguments you wish, and return the manipulated string.
+```javascript
+const person = "Mike";
+const age = 28;
+
+function myTag(strings, personExp, ageExp) {
+    const str0 = strings[0]; // "That "
+    const str1 = strings[1]; // " is a "
+    const str2 = strings[2]; // "."
+
+    const ageStr = ageExp > 99 ? "centenarian" : "youngster";
+
+    // We can even return a string built using a template literal
+    return `${str0}${personExp}${str1}${ageStr}${str2}`;
+}
+
+const output = myTag`That ${person} is a ${age}.`;
+
+console.log(output);
+// That Mike is a youngster.
+```
