@@ -314,11 +314,150 @@ Object.values();
 Topic: **Prototypes and Object-Oriented Programming**
 
 33. What is the prototype in JavaScript, and how does it work with objects? Explain the prototype chain.
+
+    **Answer:** all JavaScript objects inherit properties and methods from a prototype. When we call myObject.toString(), the browser:
+    - looks for toString in myObject 
+    - can't find it there, so looks in the prototype object of myObject for toString 
+    - finds it there, and calls it.
+
+The prototype chain is a mechanism that allows objects to inherit properties and methods from other objects. Every object can have exactly one prototype object. That prototype object can also have a prototype object, and so on, creating a chain of inheritied properties and methods. The end of this chain is called the null prototype.
+
+```javascript
+const animal = {
+    dna: 'ATCG',
+};
+
+const dog = {
+    face: '🐺',
+}
+
+Object.setPrototypeOf(dog, animal);
+
+Object.getPrototypeOf(dog) === animal; // true
+
+Object.getPrototypeOf(animal) === Object.prototype; // true
+
+Object.getPrototypeOf(Object.prototype) === null; // true
+```
 34. How do objects, prototypes, and property descriptors tie together to form the foundation of object-oriented programming in JavaScript?
+
+    **Answer:** we have an object linked to a prototype. Prototypes contain all methods and these methods are accessible to all objects linked to this prototype. This is called Prototypal Inheritance (or Prototypal Delegation).
+    There are three main ways to implement Prototypal Inheritance:
+    - Using Constructor Functions
+    ```javascript
+    function User(name){
+        this.name = name;
+
+        // never create function inside constructor function
+        this.printName = function(){
+        console.log(this.name);
+        }
+        console.log(this);
+    }
+    
+    // or
+    User.prototype.printName = function(){
+	    console.log(this.name)
+    }
+
+    let kedar = new User("kedar")
+    ```
+    - Using ES6 Classes
+    ```javascript
+    class User{
+	    constructor(name){
+    	    this.name = name
+        }
+    
+        printName(){
+            console.log(this.name);
+        }
+    }
+
+    const kedar = new User("kedar")
+    ```
+    - Using Object.create() - returns a new object with the specified prototype object and properties.
+    ```javascript
+    const User = {
+        init(name){
+            this.name = name
+        },
+    
+        printName(){
+            console.log(this.name);
+        }
+    }
+
+    let kedar = Object.create(User)
+    kedar.init("kedar")
+    kedar.printName()
+    ``` 
 35. How do you create an object in JavaScript using constructor functions or classes? Provide examples of both approaches.
+
+    **Answer:**
+```javascript
+// 1 way: obj -> Object.prototype -> null
+let obj = {a: 1};
+
+// 2 way: newObj -> obj -> Object.prototype -> null
+const newObj = Object.create(obj)
+
+// 3 way: ES6 classes
+class Rectangle {
+	constructor(height, width){
+		this.height = height;
+		this.width = width;
+	};
+	getArea = () => this.width * this.height;
+}
+```
 36. Explain the attributes in a property descriptor, such as value, writable, enumerable, and configurable.
+
+    **Answer:** Property attributes:
+    - `[[Value]]` - value of field
+    - `[[Get]]` - for getter (that’s why can be undefined)
+    - `[[Set]]` - for setter (that’s why can be undefined)
+    - `[[Writable]]` - default: true - can we rewrite the value
+    - `[[Enumerable]]` - default: true - can we use with `for in`
+    - `[[Configurable]]` - default: true - if false: not deletable, makes writable and enumerated = false, makes get and set false
 37. What are accessor properties, and how can you define them using get and set in property descriptors?
 
+    **Answer:** Descriptors for accessor properties are different from those for data properties. For accessor properties, there is no value or writable, but instead there are get and set functions. That is, an accessor descriptor may have:
+    - get – a function without arguments, that works when a property is read
+    - set – a function with one argument, that is called when the property is set 
+    - enumerable – same as for data properties
+    - configurable – same as for data properties
+```javascript
+//accessor descriptors
+let user = {
+  name: "John",
+  surname: "Smith"
+};
+
+Object.defineProperty(user, 'fullName', {
+  get() {
+    return `${this.name} ${this.surname}`;
+  },
+
+  set(value) {
+    [this.name, this.surname] = value.split(" ");
+  }
+});
+
+//getter and setter
+let user = {
+    name: "John",
+    surname: "Smith",
+
+    get fullName() {
+        return `${this.name} ${this.surname}`;
+    },
+
+    set fullName(value) {
+        [this.name, this.surname] = value.split(" ");
+    }
+};
+```
 Topic: **Arrays**
 
 38. Explain the difference between the splice and slice methods in JavaScript arrays. How are they used, and what are the key distinctions in their behavior? Provide examples to illustrate their usage.
