@@ -466,7 +466,7 @@ Topic: **Arrays**
 ```javascript
 array.slice(startIndex, endIndex) //array of the values found between start and end excluding the value at end
 array.splice(startIndex, deleteCount, newElem1, newElem2, newElemN);
-// start denotes the index from which the method will start its operation on the array.
+// startIndex denotes the index from which the method will start its operation on the array.
 // deleteCount denotes the number of values to be deleted from the start. If the value is 0, nothing will be deleted.
 // newElem1 to newElemN denote the values that would be added after the start.
 ```
@@ -493,7 +493,7 @@ arr.forEach()//has the property of accessing both the index and value of each el
 ```
 40. How do you create a multidimensional array in JavaScript, and how do you access and modify elements in such arrays?
 
-    **Answer:** a multidimensional array in javascript is an array that has one or more nested arrays (array of arrays -> matrix). There are two ways to create a multidimensional array in JavaScript:
+    **Answer:** a multidimensional array in javascript is an array that has one or more nested arrays (array of arrays, matrix). There are two ways to create a multidimensional array in JavaScript:
     - Using array literal
     ```javascript
         var Employee = [
