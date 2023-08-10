@@ -266,11 +266,29 @@ alert( curriedSum(1)(2) ); // 3
 ```
 30. Provide an example of function composition and describe its advantages over nested function calls.
 
-    **Answer:** function composition is a powerful technique used in programming to combine multiple functions into a single, more complex function. It allows developers to create more efficient and reusable code by breaking down complex operations into smaller, more manageable pieces.
+    **Answer:** function composition is a powerful technique used in programming to combine multiple functions into a single, more complex function. It allows developers to create more efficient and reusable code by breaking down complex operations into smaller, more manageable pieces. Advantages of Function Composition:
+    - Readability and Clarity
+    - Reusability 
+    - Modularity 
+    - Flexibility and Extensibility 
+    - Testability
+
+    In contrast, nested function calls can lead to "callback hell," reduced code readability, and make it harder to reason about complex behaviors. Function composition provides a more structured and organized way to combine functions, leading to cleaner and more maintainable code.
 ```javascript
 let hello = (x) => `Hello, ${x}`;
 let toUpperCase = x => x.toUpperCase();
 let greeting = x => hello(toUpperCase(x));
+
+function outerFunction(outerParam) {
+    console.log("Outer function is called with:", outerParam);
+
+    function innerFunction(innerParam) {
+        console.log("Inner function is called with:", innerParam);
+    }
+
+    // Call the inner function
+    innerFunction("Inner parameter value");
+}
 ```
 31. Describe various array methods such as map, filter, reduce, and forEach, and provide examples of their usage.
 
