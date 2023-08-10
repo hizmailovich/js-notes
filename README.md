@@ -338,6 +338,22 @@ Object.getPrototypeOf(dog) === animal; // true
 Object.getPrototypeOf(animal) === Object.prototype; // true
 
 Object.getPrototypeOf(Object.prototype) === null; // true
+
+function Student() {
+    this.name = 'John';
+    this.gender = 'M';
+}
+
+var studObj = new Student();
+
+console.log(Student.prototype); // object
+console.log(studObj.prototype); // undefined
+console.log(studObj.__proto__); // object
+
+console.log(typeof Student.prototype); // object
+console.log(typeof studObj.__proto__); // object
+
+console.log(Student.prototype === studObj.__proto__ ); // true
 ```
 34. How do objects, prototypes, and property descriptors tie together to form the foundation of object-oriented programming in JavaScript?
 
