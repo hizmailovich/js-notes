@@ -11,7 +11,7 @@ Topic: **Node.js, V8 engine, NPM, Version system, and Module system**
     **Answer:** The package manager in the Node.js ecosystem is NPM (Node Package Manager). It is a command-line tool and a vast repository of reusable code modules and libraries. NPM allows developers to easily manage dependencies and integrate third-party functionality into their Node.js applications.
 3. What is versioning in software development? Describe the MAJOR, MINOR, and PATCH versioning system commonly used in package management.
     
-    **Answer:** The Node Package Manager (npm) ecosystem uses Semantic Versioning as the standard for version numbers. The NPM ecosystem uses Semantic Versioning (SemVer) which follows the convention of MAJOR.MINOR.PATCH. This is to differentiate between versions that introduce major breaking changes, minor backwards-compatible changes, and patch changes for small fixes.
+    **Answer:** The Node Package Manager (npm) ecosystem uses Semantic Versioning as the standard for version numbers which follows the convention of MAJOR.MINOR.PATCH. This is to differentiate between versions that introduce major breaking changes, minor backwards-compatible changes, and patch changes for small fixes.
 4. How do you use modules in JavaScript? How can you write your own module? Provide an overview of the module system in Node.js.
     
     **Answer:** Module in Node.js is a simple or complex functionality organized in single or multiple JavaScript files which can be reused throughout the Node.js application. Built-in Modules, Local modules, Third-party modules. Node.js has two module systems: CommonJS (`require()`, and variables and functions export from a CommonJS module with `module.exports`) modules and ECMAScript (`import` and `export` statements) modules. Authors can tell Node.js to use the ECMAScript modules loader via the .mjs file extension, the package.json "type" field. ES modules are the standard for JavaScript, while CommonJS is the default in Node.js
@@ -19,12 +19,16 @@ Topic: **Node.js, V8 engine, NPM, Version system, and Module system**
    
     **Answer:** Generally, modules are scoped inside the project directory only, it means you can’t use them outside the project. But as global modules are installed on the computer (mostly root location), they can easily be used anywhere in our system. 
 Install a module locally if you're going to require() it. Install a module globally if you're going to run it on the command line. ~1.2.3 is equivalent to >=1.2.3 <1.3.0; ^1.2.3 is equivalent to >=1.2.3 <2.0.0
+```shell
+npm install <module>
+npm install <module> --global
+```
 
 Topic: **JavaScript Basics**
 
 6. What is the difference between regular functions and arrow functions in JavaScript? How are they used, and when should you prefer one over the other?
 
-   **Answer:** 
+   **Answer:** Differences:
    - `this` value: `this` value inside a regular function is dynamic and depends on the invocation. But `this` inside the arrow function is bound lexically and equals to `this` of the outer function.
    - constructors: an arrow function cannot be used as a constructor.
    - `arguments` object: arguments object inside the regular functions contains the arguments in an array-like object. The arrow function, on the opposite, doesn't define arguments (but you can easily access the arrow function arguments using a rest parameter `...args`).
@@ -32,6 +36,16 @@ Topic: **JavaScript Basics**
    - methods: you can define methods using the arrow function syntax inside classes. Arrow methods bind `this` value to the class instance. Anyhow the arrow method is invoked, `this` always equals the class instance, which is useful when the methods are used as callbacks.
    - hoisting: arrow functions cannot be accessed before initialization.
    - duplicate named parameters: arrow functions can never have duplicate named parameters, whether in strict or non-strict mode.
+```javascript
+function regularFunction(param) {
+    // Function body
+    return param;
+}
+const arrowFunction = (param) => {
+    // Function body
+    return param;
+};
+```
 7. Explain the difference between `let` and `const` in JavaScript, including their scoping rules and immutability features.
 
    **Answer:** `const` is a signal that the identifier won’t be reassigned. `let` is a signal that the variable may be reassigned. It also signals that the variable will be used only in the block it’s defined in, which is not always the entire containing function.
@@ -51,13 +65,15 @@ Topic: **JavaScript Basics**
    **Answer:** hoisting is a concept where a variable or function is lifted to the top of its global or local scope before the whole code is executed. This makes it possible for such a variable/function to be accessed before initialization. All functions and variables in JavaScript are hoisted, but only declared functions can be accessed before initialization. Variables declared with `let` and `const` are hoisted, but they cannot be accessed before the line they are initialized.
 10. Describe how logical operations work in JavaScript, and name all the object methods available for Boolean objects.
 
-    **Answer:** there are four logical operators in JavaScript: || (OR), && (AND), ! (NOT), ?? (Nullish Coalescing). ?? returns the first argument if it’s not null/undefined. Otherwise, the second one. Boolean.prototype.toString(), Boolean.prototype.valueOf().
+    **Answer:** there are four logical operators in JavaScript: `||` (OR), `&&` (AND), `!` (NOT), `??` (Nullish Coalescing). `??` returns the first argument if it’s not null/undefined. Otherwise, the second one. For Boolean objects, there are several methods available:
+    - `Boolean.prototype.toString()` - a string representation of the Boolean object's value ("true" or "false").
+    - `Boolean.prototype.valueOf()` - primitive value (Boolean) of the Boolean object.
 
 Topic: **Objects and Functions**
 
 11. How do objects look like in JavaScript, and what are property descriptors associated with object properties?
 
-    **Answer:** a property descriptor of an object consists of some of the following attributes to define each property:
+    **Answer:** an object is a collection of key-value pairs, where keys are strings (or Symbols) and values can be of any data type, including other objects or functions. Objects allow you to group related properties and methods together, providing a structured way to represent real-world entities or concepts. A property descriptor of an object consists of some of the following attributes to define each property:
     - value: the value associated with the property that is called.
     - writable: indicates if the property can be changed or not. It only returns true if the property can be manipulated.
     - enumerable: if the property is visible during enumeration of the properties of the corresponding object, then it returns true. 
@@ -66,11 +82,34 @@ Topic: **Objects and Functions**
 const obj = {
     property1: 2
 };
+Object.defineProperty(obj, "property1", {
+    value: "Hello",
+    writable: false,
+    enumerable: true,
+    configurable: true
+});
 const descriptor1 = Object.getOwnPropertyDescriptor(obj, 'property1');
 ```
+![Untitled.png](file%2FUntitled.png)
 12. What is a deep clone of an object, and how can you proceed to create one in JavaScript?
 
-    **Answer:** a deep copy is a copy of all elements of the original object. Changes made to the original object will not be reflected in the copy. BFS and DFS.
+    **Answer:** a deep copy is a copy of all elements of the original object. Changes made to the original object will not be reflected in the copy. BFS (Breadth-First Search) and DFS (Depth First Search). Ways:
+    - Using `JSON.parse()` and `JSON.stringify()`
+    - Using a Recursive Approach
+    ```javascript
+    export const deepCloneObject = (obj) => {
+        if (typeof obj != 'object' || obj == null) {
+            return obj;
+        }
+        const result = {};
+        const keys = Object.keys(obj);
+        for (let key in keys) {
+            result[keys[key]] = deepCloneObject(obj[keys[key]]);
+        }
+        return result;
+    }
+    ```
+    - Using External Libraries (lodash)
 13. Explain the CommonJS module system and how it is utilized in Node.js to organize and share code between different files.
 
     **Answer:** the CommonJS module format specifies a way to define a module using a `require()` function to load modules and `module.exports` or `exports` object to expose functionality. Files with a .js extension when the nearest parent package.json file contains a top-level field `type` with a value of `commonjs`.
@@ -90,7 +129,7 @@ module.exports = add
     **Answer:** in Node.js, `module` is a plain JavaScript object with an `exports` property. `exports` is a plain JavaScript variable that happens to be set to `module.exports`. When you require a module in another file, the code within that module is executed, and only `module.exports` is returned. When should you choose `exports` over `module.exports`? The short answer is that you probably shouldn't. While `exports` may be shorter and seem more convenient, the confusion it can cause is not worth it. Remember that `exports` is just a reference to `module.exports`, and assigning a new object to `exports` breaks that reference.
 ![img.png](file%2Fimg.png)
 
-    In summary, the key difference is that exports is a shorthand reference to module.exports, and you can attach properties and methods to it, while module.exports is the actual object that determines what is exported when a module is required. If you want to replace the entire exported object, you should use module.exports. If you just want to attach properties or methods to the existing export, you can use exports.
+    In summary, the key difference is that exports is a shorthand reference to `module.exports`, and you can attach properties and methods to it, while `module.exports` is the actual object that determines what is exported when a module is required. If you want to replace the entire exported object, you should use `module.exports`. If you just want to attach properties or methods to the existing export, you can use `exports`.
 17. What is the difference between "exports" and "require" in a Node.js module? How are they related to each other in the module system?
 
     **Answer:** `exports` is used within a module to expose functionality to other parts of your application, while `require` is used to import functionality from other modules into your current module. These two concepts work together to create a modular structure in your Node.js application, promoting code reusability and maintainability.
@@ -179,7 +218,7 @@ const square = function (number) {
     - `arguments` object (ES5) - is a local JavaScript object variable that is available in all non-arrow functions. arguments is an Array-like object accessible inside functions that contain the values of the arguments passed to that function.
     - rest parameters `...args` (ES6) - provides an easier and cleaner way of working with an indefinite number of arguments.
     
-    The main difference between rest parameters and the arguments object is:
+    The main difference between rest parameters and the `arguments` object is:
     - all the array methods like map, sort, and filter can be applied directly on the rest parameters array but not on the `arguments` object. To use Array methods on the `arguments` object, it must be converted to a real array first.
     - the `arguments` object is not available in arrow functions.
 ```javascript
@@ -214,7 +253,10 @@ Topic: **Pure Functions and Immutability**
 
 25. What is a pure function in JavaScript, and what characteristics define a function as "pure"? How do pure functions relate to immutability in JavaScript?
 
-    **Answer:** is a function that always returns the same result if the same arguments are passed. It does not depend on any state or data change during a program’s execution. Rather, it only depends on its input arguments. Also, a pure function does not produce any observable side effects such as network requests or data mutation, etc. Pure functions don't modify their input. They treat the input values as immutable.
+    **Answer:** is a function that always returns the same result if the same arguments are passed (idempotent). It does not depend on any state or data change during a program’s execution. Rather, it only depends on its input arguments. Also, a pure function does not produce any observable side effects such as network requests or data mutation, etc. Pure functions don't modify their input. They treat the input values as immutable. Advantages:
+    - More readable 
+    - Better for optimisation 
+    - Better for testing
 26. Describe the concept of named immutable methods in JavaScript and provide examples of such methods. 
 
     **Answer:** the concept of named immutable methods refers to a programming pattern where methods are designed to perform operations on data without modifying the original data. Instead of directly altering the existing data, these methods return new copies or instances with the desired changes applied. Here are some examples of named immutable methods in JavaScript:
@@ -303,36 +345,37 @@ a.forEach(x => console.log(x))
 ```
 32. How do you create and initialize objects using object literals and the "new" keyword in JavaScript? How can you access, modify, and delete object properties?
 
-    **Answer:**
-```javascript
-// 1 way: obj -> Object.prototype -> null
-let obj = {a: 1};
-
-// 2 way: newObj -> obj -> Object.prototype -> null
-const newObj = Object.create(obj)
-
-// 3 way: ES6 classes
-class Rectangle {
-	constructor(height, width){
-		this.height = height;
-		this.width = width;
-	}
-	getArea = () => this.width * this.height;
-}
-// Properties
-// 1 way
-Object.keys();
-Object.entires();
-Object.values();
-
-// 2 way
-// loop - for in
-
-// 3 way
+    **Answer:** creating and Initializing Objects:
+    - Object Literals
+    ```javascript
+    const person = {
+    firstName: "John",
+    lastName: "Doe",
+    age: 30,
+    isStudent: false
+    };
+    ```
+    - Using the "new" Keyword
+    ```javascript
+    function Person(firstName, lastName, age, isStudent) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.isStudent = isStudent;
+    }
+    const person = new Person("John", "Doe", 30, false);
+    ```
+    Accessing, modifying, deleting adding:
+    ```javascript
+    console.log(person.firstName);
+    person.age = 31;
+    delete person.isStudent;
+    person.city = "New York";
+    person["country"] = "USA";
     Object.getOwnPropertyNames();
     Object.defineProperty();
     Object.defineProperties();
-```
+    ```
 
 Topic: **Prototypes and Object-Oriented Programming**
 
@@ -446,6 +489,14 @@ class Rectangle {
 	};
 	getArea = () => this.width * this.height;
 }
+// 4 way: constructor func
+function Person(firstName, lastName, age, isStudent) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+    this.isStudent = isStudent;
+}
+const person = new Person("John", "Doe", 30, false);
 ```
 36. Explain the attributes in a property descriptor, such as value, writable, enumerable, and configurable.
 
@@ -498,7 +549,7 @@ Topic: **Arrays**
 
 38. Explain the difference between the splice and slice methods in JavaScript arrays. How are they used, and what are the key distinctions in their behavior? Provide examples to illustrate their usage.
 
-    **Answer:** slice returns a piece of the array but it doesn’t affect the original array. splice changes the original array by removing, replacing, or adding values and returns the affected values.
+    **Answer:** `slice` returns a piece of the array but it doesn’t affect the original array. `splice` changes the original array by removing, replacing, or adding values and returns the affected values.
 ```javascript
 array.slice(startIndex, endIndex) //array of the values found between start and end excluding the value at end
 array.splice(startIndex, deleteCount, newElem1, newElem2, newElemN);
@@ -508,7 +559,7 @@ array.splice(startIndex, deleteCount, newElem1, newElem2, newElemN);
 ```
 39. How can you loop through an array using a for loop, and what are the benefits of using array methods like forEach instead?
 
-    **Answer:** `for`does not provide a facility for modification during iteration, but it is faster in performance; `forEach` cannot provide a facility to break the statement because of the callback method. The for loop consumes less execution time and is helpful in solving complex problems.
+    **Answer:** `for`does not provide a facility for modification during iteration, but it is faster in performance; `forEach` cannot provide a facility to break the statement because of the callback method. The `for` loop consumes less execution time and is helpful in solving complex problems.
 ```javascript
 //for...of
 for(let value of a){
