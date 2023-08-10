@@ -217,7 +217,10 @@ Topic: **Pure Functions and Immutability**
     **Answer:** is a function that always returns the same result if the same arguments are passed. It does not depend on any state or data change during a program’s execution. Rather, it only depends on its input arguments. Also, a pure function does not produce any observable side effects such as network requests or data mutation, etc. Pure functions don't modify their input. They treat the input values as immutable.
 26. Describe the concept of named immutable methods in JavaScript and provide examples of such methods. 
 
-    **Answer:** 
+    **Answer:** the concept of named immutable methods refers to a programming pattern where methods are designed to perform operations on data without modifying the original data. Instead of directly altering the existing data, these methods return new copies or instances with the desired changes applied. Here are some examples of named immutable methods in JavaScript:
+    - Array.prototype.map()
+    - Array.prototype.concat()
+    - String.prototype.slice()
 27. Provide an example of a Higher-Order Function in JavaScript and explain how it can accept another function as an argument.
 
     **Answer:** higher order function is a function that takes one or more functions as arguments, or returns a function as its result.
