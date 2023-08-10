@@ -93,7 +93,7 @@ module.exports = add
     In summary, the key difference is that exports is a shorthand reference to module.exports, and you can attach properties and methods to it, while module.exports is the actual object that determines what is exported when a module is required. If you want to replace the entire exported object, you should use module.exports. If you just want to attach properties or methods to the existing export, you can use exports.
 17. What is the difference between "exports" and "require" in a Node.js module? How are they related to each other in the module system?
 
-    **Answer:** 
+    **Answer:** `exports` is used within a module to expose functionality to other parts of your application, while `require` is used to import functionality from other modules into your current module. These two concepts work together to create a modular structure in your Node.js application, promoting code reusability and maintainability.
 ```javascript
 const circle = require('./circle.js');
 exports.area = (r) => PI * r ** 2;
