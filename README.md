@@ -89,9 +89,11 @@ module.exports = add
 
     **Answer:** in Node.js, `module` is a plain JavaScript object with an `exports` property. `exports` is a plain JavaScript variable that happens to be set to `module.exports`. When you require a module in another file, the code within that module is executed, and only `module.exports` is returned. When should you choose `exports` over `module.exports`? The short answer is that you probably shouldn't. While `exports` may be shorter and seem more convenient, the confusion it can cause is not worth it. Remember that `exports` is just a reference to `module.exports`, and assigning a new object to `exports` breaks that reference.
 ![img.png](file%2Fimg.png)
+
+    In summary, the key difference is that exports is a shorthand reference to module.exports, and you can attach properties and methods to it, while module.exports is the actual object that determines what is exported when a module is required. If you want to replace the entire exported object, you should use module.exports. If you just want to attach properties or methods to the existing export, you can use exports.
 17. What is the difference between "exports" and "require" in a Node.js module? How are they related to each other in the module system?
 
-    **Answer:** 
+    **Answer:** `exports` is used within a module to expose functionality to other parts of your application, while `require` is used to import functionality from other modules into your current module. These two concepts work together to create a modular structure in your Node.js application, promoting code reusability and maintainability.
 ```javascript
 const circle = require('./circle.js');
 exports.area = (r) => PI * r ** 2;
@@ -215,7 +217,10 @@ Topic: **Pure Functions and Immutability**
     **Answer:** is a function that always returns the same result if the same arguments are passed. It does not depend on any state or data change during a program’s execution. Rather, it only depends on its input arguments. Also, a pure function does not produce any observable side effects such as network requests or data mutation, etc. Pure functions don't modify their input. They treat the input values as immutable.
 26. Describe the concept of named immutable methods in JavaScript and provide examples of such methods. 
 
-    **Answer:** 
+    **Answer:** the concept of named immutable methods refers to a programming pattern where methods are designed to perform operations on data without modifying the original data. Instead of directly altering the existing data, these methods return new copies or instances with the desired changes applied. Here are some examples of named immutable methods in JavaScript:
+    - Array.prototype.map()
+    - Array.prototype.concat()
+    - String.prototype.slice()
 27. Provide an example of a Higher-Order Function in JavaScript and explain how it can accept another function as an argument.
 
     **Answer:** higher order function is a function that takes one or more functions as arguments, or returns a function as its result.
@@ -261,11 +266,29 @@ alert( curriedSum(1)(2) ); // 3
 ```
 30. Provide an example of function composition and describe its advantages over nested function calls.
 
-    **Answer:** function composition is a powerful technique used in programming to combine multiple functions into a single, more complex function. It allows developers to create more efficient and reusable code by breaking down complex operations into smaller, more manageable pieces.
+    **Answer:** function composition is a powerful technique used in programming to combine multiple functions into a single, more complex function. It allows developers to create more efficient and reusable code by breaking down complex operations into smaller, more manageable pieces. Advantages of Function Composition:
+    - Readability and Clarity
+    - Reusability 
+    - Modularity 
+    - Flexibility and Extensibility 
+    - Testability
+
+    In contrast, nested function calls can lead to "callback hell," reduced code readability, and make it harder to reason about complex behaviors. Function composition provides a more structured and organized way to combine functions, leading to cleaner and more maintainable code.
 ```javascript
 let hello = (x) => `Hello, ${x}`;
 let toUpperCase = x => x.toUpperCase();
 let greeting = x => hello(toUpperCase(x));
+
+function outerFunction(outerParam) {
+    console.log("Outer function is called with:", outerParam);
+
+    function innerFunction(innerParam) {
+        console.log("Inner function is called with:", innerParam);
+    }
+
+    // Call the inner function
+    innerFunction("Inner parameter value");
+}
 ```
 31. Describe various array methods such as map, filter, reduce, and forEach, and provide examples of their usage.
 
@@ -332,12 +355,25 @@ const dog = {
 }
 
 Object.setPrototypeOf(dog, animal);
-
 Object.getPrototypeOf(dog) === animal; // true
-
 Object.getPrototypeOf(animal) === Object.prototype; // true
-
 Object.getPrototypeOf(Object.prototype) === null; // true
+
+function Student() {
+    this.name = 'John';
+    this.gender = 'M';
+}
+
+var studObj = new Student();
+
+console.log(Student.prototype); // object
+console.log(studObj.prototype); // undefined
+console.log(studObj.__proto__); // object
+
+console.log(typeof Student.prototype); // object
+console.log(typeof studObj.__proto__); // object
+
+console.log(Student.prototype === studObj.__proto__ ); // true
 ```
 34. How do objects, prototypes, and property descriptors tie together to form the foundation of object-oriented programming in JavaScript?
 
