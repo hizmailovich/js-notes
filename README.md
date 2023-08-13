@@ -91,6 +91,7 @@ Object.defineProperty(obj, "property1", {
 const descriptor1 = Object.getOwnPropertyDescriptor(obj, 'property1');
 ```
 ![Untitled.png](file%2FUntitled.png)
+
 12. What is a deep clone of an object, and how can you proceed to create one in JavaScript?
 
     **Answer:** a deep copy is a copy of all elements of the original object. Changes made to the original object will not be reflected in the copy. BFS (Breadth-First Search) and DFS (Depth First Search). Ways:
