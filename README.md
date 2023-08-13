@@ -96,20 +96,8 @@ const descriptor1 = Object.getOwnPropertyDescriptor(obj, 'property1');
     **Answer:** a deep copy is a copy of all elements of the original object. Changes made to the original object will not be reflected in the copy. BFS (Breadth-First Search) and DFS (Depth First Search). Ways:
     - Using `JSON.parse()` and `JSON.stringify()`
     - Using a Recursive Approach
-    ```javascript
-    export const deepCloneObject = (obj) => {
-        if (typeof obj != 'object' || obj == null) {
-            return obj;
-        }
-        const result = {};
-        const keys = Object.keys(obj);
-        for (let key in keys) {
-            result[keys[key]] = deepCloneObject(obj[keys[key]]);
-        }
-        return result;
-    }
-    ```
     - Using External Libraries (lodash)
+
 13. Explain the CommonJS module system and how it is utilized in Node.js to organize and share code between different files.
 
     **Answer:** the CommonJS module format specifies a way to define a module using a `require()` function to load modules and `module.exports` or `exports` object to expose functionality. Files with a .js extension when the nearest parent package.json file contains a top-level field `type` with a value of `commonjs`.
@@ -129,7 +117,7 @@ module.exports = add
     **Answer:** in Node.js, `module` is a plain JavaScript object with an `exports` property. `exports` is a plain JavaScript variable that happens to be set to `module.exports`. When you require a module in another file, the code within that module is executed, and only `module.exports` is returned. When should you choose `exports` over `module.exports`? The short answer is that you probably shouldn't. While `exports` may be shorter and seem more convenient, the confusion it can cause is not worth it. Remember that `exports` is just a reference to `module.exports`, and assigning a new object to `exports` breaks that reference.
 ![img.png](file%2Fimg.png)
 
-    In summary, the key difference is that exports is a shorthand reference to `module.exports`, and you can attach properties and methods to it, while `module.exports` is the actual object that determines what is exported when a module is required. If you want to replace the entire exported object, you should use `module.exports`. If you just want to attach properties or methods to the existing export, you can use `exports`.
+    In summary, the key difference is that `exports` is a shorthand reference to `module.exports`, and you can attach properties and methods to it, while `module.exports` is the actual object that determines what is exported when a module is required. If you want to replace the entire exported object, you should use `module.exports`. If you just want to attach properties or methods to the existing export, you can use `exports`.
 17. What is the difference between "exports" and "require" in a Node.js module? How are they related to each other in the module system?
 
     **Answer:** `exports` is used within a module to expose functionality to other parts of your application, while `require` is used to import functionality from other modules into your current module. These two concepts work together to create a modular structure in your Node.js application, promoting code reusability and maintainability.
@@ -679,7 +667,7 @@ const substr = str.slice(3); // 'lo'
     
 45. What is the difference between a tagged template literal and a regular template literal? How can you use tagged template literals to customize string interpolation behavior?
 
-    **Answer:** tags allow you to parse template literals with a function. The first argument of a tag function contains an array of string values. The remaining arguments are related to the expressions. The tag function can then perform whatever operations on these arguments you wish, and return the manipulated string.
+    **Answer:** tags allow you to parse template literals with a function. The first argument of a tag function contains an array of string values. The remaining arguments are related to the expressions. The tag function can then perform whatever operations on these arguments you wish, and return the manipulated string. regular template literals provide simple string interpolation, while tagged template literals allow you to customize the interpolation process by using a tag function.
 ```javascript
 const person = "Mike";
 const age = 28;
