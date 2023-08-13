@@ -96,6 +96,7 @@ const descriptor1 = Object.getOwnPropertyDescriptor(obj, 'property1');
     **Answer:** a deep copy is a copy of all elements of the original object. Changes made to the original object will not be reflected in the copy. BFS (Breadth-First Search) and DFS (Depth First Search). Ways:
     - Using `JSON.parse()` and `JSON.stringify()`
     - Using a Recursive Approach
+    - Using External Libraries (lodash)
     ```javascript
     export const deepCloneObject = (obj) => {
         if (typeof obj != 'object' || obj == null) {
@@ -109,7 +110,6 @@ const descriptor1 = Object.getOwnPropertyDescriptor(obj, 'property1');
         return result;
     }
     ```
-    - Using External Libraries (lodash)
 13. Explain the CommonJS module system and how it is utilized in Node.js to organize and share code between different files.
 
     **Answer:** the CommonJS module format specifies a way to define a module using a `require()` function to load modules and `module.exports` or `exports` object to expose functionality. Files with a .js extension when the nearest parent package.json file contains a top-level field `type` with a value of `commonjs`.
