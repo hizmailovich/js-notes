@@ -209,7 +209,7 @@ function square(number) {
   return number * number;
 }
 
-const square = function (number) {
+const square = function (number) { //expression declaration
     return number * number;
 };
 ```
