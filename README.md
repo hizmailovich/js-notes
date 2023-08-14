@@ -701,3 +701,14 @@ const output = myTag`That ${person} is a ${age}.`;
 console.log(output);
 // That Mike is a youngster.
 ```
+```javascript
+const pipe =
+  (...fns) =>
+  (x) =>
+    fns.reduce((res, fn) => fn(res), x);
+
+const compose = (...functions) => (...args) => {
+    return functions.reduce((res, fun) => fun(res), args);
+}
+
+```
